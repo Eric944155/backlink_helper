@@ -1,4 +1,4 @@
-    :root {
+:root {
       --bg: #f6f8fb;
       --card: #ffffff;
       --border: #d9e1ec;
@@ -1508,10 +1508,3 @@
       color: var(--muted) !important;
       border-radius: 0 0 0 8px;
     }
-
-  </style>
-            <style>
-              table { border-collapse: collapse; table-layout: fixed; font-family: "Times New Roman", 宋体, SimSun, serif; font-size: 11pt; }
-              td, th { border: .5pt solid #000000; vertical-align: middle; mso-number-format:"\\@"; }
-              .xlTitle { background:#BDD7EE; font-family: 等线, DengXian, sans-serif; font-size:15.75pt; font-weight:700; text-align:center; }
-              .xlHeader { background:#8EA9DB; font-family: 等线, DengXian, sans-serif; font-size:12pt; font-weight:700; text-align:center; }
