@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "app/api/fetch-page/route.js": { "maxDuration": 30 },
+    "app/api/check-index/route.js": { "maxDuration": 30 },
+    "app/api/check-url/route.js": { "maxDuration": 30 }
+  }
+}
