@@ -379,7 +379,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
             <!-- 结果表格 -->
             <div id="healthCheckResults" style="margin-top:16px;display:none;">
               <div style="overflow:auto;max-height:580px;border:1px solid var(--border);border-radius:12px;">
-                <table id="healthCheckTable" style="width:100%;border-collapse:collapse;font-size:12px;min-width:1100px;">
+                <table id="healthCheckTable" style="width:100%;border-collapse:collapse;font-size:12px;min-width:1350px;">
                   <thead><tr style="background:#edf4ff;position:sticky;top:0;z-index:1;">
                     <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;font-weight:700;width:36px;">#</th>
                     <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;font-weight:700;min-width:200px;">外链页面 URL</th>
@@ -389,6 +389,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
                     <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:center;font-weight:700;width:80px;">链接属性</th>
                     <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;font-weight:700;min-width:120px;">锚文本</th>
                     <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;font-weight:700;">Redirect Chain</th>
+                    <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;font-weight:700;min-width:240px;">最终 URL</th>
                     <th style="padding:10px 8px;border-bottom:1px solid var(--border);text-align:center;font-weight:700;width:65px;">Noindex</th>
                   </tr></thead>
                   <tbody id="healthCheckTableBody"></tbody>
