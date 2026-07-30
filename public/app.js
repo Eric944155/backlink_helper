@@ -2712,24 +2712,71 @@ function parseBulkPublishedUrls(text = '') {
         const dfColor = linkAttr==='Dofollow'?'#34d399':linkAttr==='Nofollow'?'#fb7185':'#9aa1b8';
         const dfBg = linkAttr==='Dofollow'?'rgba(52,211,153,0.14)':linkAttr==='Nofollow'?'rgba(251,113,133,0.14)':'rgba(255,255,255,0.05)';
 
-        const finalUrlHtml = hasRedirect
-  ? `<a href="${extEscapeHtml(finalUrl)}"
-        target="_blank"
-        rel="noopener"
-        title="${extEscapeHtml(finalUrl)}"
-        style="color:#93c5fd;text-decoration:none;word-break:break-all;">
-       ${extEscapeHtml(finalUrl)}
-     </a>`
+const finalUrlHtml = hasRedirect
+  ? `<a
+       href="${extEscapeHtml(finalUrl)}"
+       target="_blank"
+       rel="noopener"
+       title="${extEscapeHtml(finalUrl)}"
+       style="color:#93c5fd;text-decoration:none;word-break:break-all;"
+     >${extEscapeHtml(finalUrl)}</a>`
   : '—';
-        
-        row.innerHTML=`<td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);">${index+1}</td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);word-break:break-all;color:#93c5fd;max-width:260px;font-size:11px;"><a href="${extEscapeHtml(url)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${extEscapeHtml(url)}</a></td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;font-weight:700;color:${label.color};">${finalStatus||'ERR'}</td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;"><span style="display:inline-block;padding:3px 8px;border-radius:6px;background:${label.bg};color:${label.color};font-weight:600;font-size:11px;">${label.text}</span></td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;"><span style="display:inline-block;padding:3px 8px;border-radius:6px;background:${linkStatusBg};color:${linkStatusColor};font-weight:600;font-size:11px;">${linkStatus}</span></td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;"><span style="display:inline-block;padding:3px 8px;border-radius:6px;background:${dfBg};color:${dfColor};font-weight:600;font-size:11px;">${linkAttr}</span></td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);max-width:150px;font-size:11px;word-break:break-all;">${extEscapeHtml(anchorText)}</td><td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:11px;">
-  ${hasRedirect?formatChain(chain):'—'}
+
+row.innerHTML = `
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);">
+    ${index + 1}
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);word-break:break-all;color:#93c5fd;max-width:260px;font-size:11px;">
+    <a
+      href="${extEscapeHtml(url)}"
+      target="_blank"
+      rel="noopener"
+      style="color:inherit;text-decoration:none;"
+    >${extEscapeHtml(url)}</a>
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;font-weight:700;color:${label.color};">
+    ${finalStatus || 'ERR'}
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;">
+    <span style="display:inline-block;padding:3px 8px;border-radius:6px;background:${label.bg};color:${label.color};font-weight:600;font-size:11px;">
+      ${label.text}
+    </span>
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;">
+    <span style="display:inline-block;padding:3px 8px;border-radius:6px;background:${linkStatusBg};color:${linkStatusColor};font-weight:600;font-size:11px;">
+      ${linkStatus}
+    </span>
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;">
+    <span style="display:inline-block;padding:3px 8px;border-radius:6px;background:${dfBg};color:${dfColor};font-weight:600;font-size:11px;">
+      ${linkAttr}
+    </span>
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);max-width:150px;font-size:11px;word-break:break-all;">
+    ${extEscapeHtml(anchorText)}
+  </td>
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:11px;">
+    ${hasRedirect ? formatChain(chain) : '—'}
+  </td>
+
   <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:11px;max-width:280px;word-break:break-all;">
     ${finalUrlHtml}
   </td>
-</td>
- <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;color:${noindex?'#fb7185':'#9aa1b8'};font-weight:${noindex?'700':'400'};">${noindex?'Yes':'—'}</td>`;
-        tbody.appendChild(row);
+
+  <td style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:center;color:${noindex ? '#fb7185' : '#9aa1b8'};font-weight:${noindex ? '700' : '400'};">
+    ${noindex ? 'Yes' : '—'}
+  </td>
+`;
+
+tbody.appendChild(row);
+        
       }
       let nextIdx=0;
       async function runner(){while(nextIdx<urls.length){const i=nextIdx++;await worker(urls[i],i);}}
