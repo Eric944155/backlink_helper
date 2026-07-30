@@ -21,14 +21,84 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     function applyPerms(sections) {
       const s = sections || [];
       const isAll = s.includes('__all__');
-      document.querySelectorAll('[data-section]').forEach(el => {
+      document.querySelectorAll('[data-section]:not([data-seo-node])').forEach(el => {
         const name = el.getAttribute('data-section');
         el.style.display = (isAll || s.includes(name)) ? '' : 'none';
       });
+      applySeoPermissions(sections);
+    }
+
+    function applySeoPermissions(sections) {
+      const resolver = window.BlhSeoPermissions && window.BlhSeoPermissions.resolveSeoAccess;
+      if (!resolver) return;
+
+      const access = resolver(sections);
+      const toolbox = document.getElementById('seoToolsExtension');
+      if (toolbox) toolbox.style.display = access.showToolbox ? '' : 'none';
+
+      const mainNodes = {
+        healthCheck: ['tabHealthCheck', 'panelHealthCheck'],
+        dofollowCheck: ['tabDofollowCheck', 'panelDofollowCheck'],
+        regexTool: ['tabRegexTool', 'panelRegexTool'],
+        indexCheck: ['tabIndexCheck', 'panelIndexCheck'],
+      };
+      Object.entries(mainNodes).forEach(([name, [tabId, panelId]]) => {
+        const tab = document.getElementById(tabId);
+        const panel = document.getElementById(panelId);
+        if (tab) {
+          tab.style.display = access.main[name] ? '' : 'none';
+          tab.classList.remove('active');
+          tab.style.borderBottomColor = 'transparent';
+          tab.style.color = 'var(--muted)';
+        }
+        if (panel) panel.style.display = 'none';
+      });
+
+      if (access.activeMain) {
+        const [tabId, panelId] = mainNodes[access.activeMain];
+        const tab = document.getElementById(tabId);
+        const panel = document.getElementById(panelId);
+        if (tab) {
+          tab.classList.add('active');
+          tab.style.borderBottomColor = 'var(--primary)';
+          tab.style.color = 'var(--primary)';
+        }
+        if (panel) panel.style.display = 'block';
+      }
+
+      const regexNodes = {
+        gsc: ['subtabGsc', 'subpanelGsc'],
+        ga4: ['subtabGa4', 'subpanelGa4'],
+      };
+      Object.entries(regexNodes).forEach(([name, [tabId, panelId]]) => {
+        const tab = document.getElementById(tabId);
+        const panel = document.getElementById(panelId);
+        if (tab) {
+          tab.style.display = access.regex[name] ? '' : 'none';
+          tab.classList.remove('active');
+          tab.style.background = 'rgba(255,255,255,0.04)';
+          tab.style.color = '#c9c3b4';
+        }
+        if (panel) panel.style.display = 'none';
+      });
+
+      if (access.activeMain === 'regexTool' && access.activeRegex) {
+        const [tabId, panelId] = regexNodes[access.activeRegex];
+        const tab = document.getElementById(tabId);
+        const panel = document.getElementById(panelId);
+        if (tab) {
+          tab.classList.add('active');
+          tab.style.background = 'var(--primary)';
+          tab.style.color = '#1a1509';
+        }
+        if (panel) panel.style.display = 'block';
+      }
     }
 
     function hideAllSections() {
-      document.querySelectorAll('[data-section]').forEach(el => { el.style.display = 'none'; });
+      document.querySelectorAll('[data-section]:not([data-seo-node])').forEach(el => { el.style.display = 'none'; });
+      const toolbox = document.getElementById('seoToolsExtension');
+      if (toolbox) toolbox.style.display = 'none';
     }
 
     function showUserBar(username, sections) {
@@ -2412,6 +2482,7 @@ function parseBulkPublishedUrls(text = '') {
       const tab = btn.dataset.tab;
       extTabBar.querySelectorAll('.ext-tab').forEach(t => {
         const isActive = t.dataset.tab === tab;
+        t.classList.toggle('active', isActive);
         t.style.borderBottomColor = isActive ? 'var(--primary)' : 'transparent';
         t.style.color = isActive ? 'var(--primary)' : 'var(--muted)';
       });
@@ -2424,6 +2495,7 @@ function parseBulkPublishedUrls(text = '') {
       const sub = btn.dataset.subtab;
       regexSubTabBar.querySelectorAll('.regex-sub-tab').forEach(t => {
         const isActive = t.dataset.subtab === sub;
+        t.classList.toggle('active', isActive);
         t.style.background = isActive ? 'var(--primary)' : 'rgba(255,255,255,0.04)';
         t.style.color = isActive ? '#1a1509' : '#c9c3b4';
       });
