@@ -218,7 +218,7 @@ const fileInput = document.getElementById('fileInput');
     const fileListEl = document.getElementById('fileList');
 
     let articles = [];
-    const DEFAULT_URL_READ_CONCURRENCY = 6;
+    const DEFAULT_URL_READ_CONCURRENCY = 2;
     const URL_READ_RETRY_COUNT = 1;
     const URL_READ_RETRY_DELAY_MS = 0;
     const URL_API_TIMEOUT_MS = 9000;
@@ -2676,7 +2676,7 @@ function parseBulkPublishedUrls(text = '') {
       document.querySelector('.bl-filter-btn[data-filter="all"]').style.color='#fff';
 
       let done=0;
-      const concurrency=Math.max(1,Math.min(10,parseInt(document.getElementById('blConcurrency').value)||3));
+      const concurrency=Math.max(1,Math.min(10,parseInt(document.getElementById('blConcurrency').value)||2));
       const delayMs=Math.max(0,parseInt(document.getElementById('blDelay').value)||0);
       const sleep=ms=>new Promise(r=>setTimeout(r,ms));
       async function worker(url,index) {
