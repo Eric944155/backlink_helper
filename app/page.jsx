@@ -285,16 +285,16 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
 
 
     <!-- ===== SEO Tools Extension ===== -->
-    <div style="margin-top:28px;" data-section="SEO工具箱">
+    <div style="margin-top:28px;" id="seoToolsExtension">
       <section class="card" id="seoToolsCard">
         <h2><span class="section-eyebrow">MODULES</span>SEO 工具箱</h2>
         <div style="display:flex;gap:0;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(248,251,255,.98),rgba(244,248,255,.92));" id="extTabBar">
-          <button type="button" class="ext-tab active" data-tab="healthCheck" id="tabHealthCheck" style="flex:1;border:0;border-bottom:2px solid var(--primary);border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--primary);box-shadow:none;">外链存活检测</button>
-          <button type="button" class="ext-tab" data-tab="dofollowCheck" id="tabDofollowCheck" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">Dofollow / Nofollow 检测</button>
-          <button type="button" class="ext-tab" data-tab="regexTool" id="tabRegexTool" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">正则表达式生成器</button>
-          <button type="button" class="ext-tab" data-tab="indexCheck" id="tabIndexCheck" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">批量收录查询 <span style="font-size:10px;padding:1px 6px;border-radius:8px;background:rgba(251,191,36,0.18);color:#fbbf24;margin-left:2px;">待更新</span></button>
+          <button type="button" class="ext-tab active" data-tab="healthCheck" id="tabHealthCheck" data-seo-node="true" data-section="外链存活检测" style="flex:1;border:0;border-bottom:2px solid var(--primary);border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--primary);box-shadow:none;">外链存活检测</button>
+          <button type="button" class="ext-tab" data-tab="dofollowCheck" id="tabDofollowCheck" data-seo-node="true" data-section="Dofollow / Nofollow 检测" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">Dofollow / Nofollow 检测</button>
+          <button type="button" class="ext-tab" data-tab="regexTool" id="tabRegexTool" data-seo-node="true" data-section-any="GSC URL 正则匹配|GA4 AI 爬虫正则" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">正则表达式生成器</button>
+          <button type="button" class="ext-tab" data-tab="indexCheck" id="tabIndexCheck" data-seo-node="true" data-section="批量收录查询" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">批量收录查询 <span style="font-size:10px;padding:1px 6px;border-radius:8px;background:rgba(251,191,36,0.18);color:#fbbf24;margin-left:2px;">待更新</span></button>
         </div>
-        <div class="ext-panel" id="panelHealthCheck" style="display:block;">
+        <div class="ext-panel" id="panelHealthCheck" data-seo-node="true" data-section="外链存活检测" style="display:block;">
           <div class="card-body">
             <p style="margin:0 0 12px;color:#b0aa9c;font-size:13px;line-height:1.6;">检测页面的 HTTP 状态、Dofollow/Nofollow 属性。支持按批次分组管理。</p>
 
@@ -397,7 +397,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
             </div>
           </div>
         </div>
-        <div class="ext-panel" id="panelDofollowCheck" style="display:none;">
+        <div class="ext-panel" id="panelDofollowCheck" data-seo-node="true" data-section="Dofollow / Nofollow 检测" style="display:none;">
           <div class="card-body">
             <p style="margin:0 0 12px;color:#b0aa9c;font-size:13px;line-height:1.6;">输入页面 URL，检测页面上所有出站链接的 dofollow/nofollow 属性，默认排除内链，只看外部链接。</p>
             <label for="dofollowCheckUrl">页面 URL（每行一个，支持批量）</label>
@@ -438,13 +438,13 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
             </div>
           </div>
         </div>
-        <div class="ext-panel" id="panelRegexTool" style="display:none;">
+        <div class="ext-panel" id="panelRegexTool" data-seo-node="true" data-section-any="GSC URL 正则匹配|GA4 AI 爬虫正则" style="display:none;">
           <div class="card-body">
             <div style="display:flex;gap:0;margin-bottom:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden;" id="regexSubTabBar">
-              <button type="button" class="regex-sub-tab active" data-subtab="gsc" id="subtabGsc" style="flex:1;border:0;padding:10px 8px;font-size:13px;font-weight:700;background:var(--primary);color:#1a1509;box-shadow:none;border-radius:0;">GSC URL 正则匹配</button>
-              <button type="button" class="regex-sub-tab" data-subtab="ga4" id="subtabGa4" style="flex:1;border:0;padding:10px 8px;font-size:13px;font-weight:700;background:rgba(255,255,255,0.04);color:#c9c3b4;box-shadow:none;border-radius:0;">GA4 AI 爬虫正则</button>
+              <button type="button" class="regex-sub-tab active" data-subtab="gsc" id="subtabGsc" data-seo-node="true" data-section="GSC URL 正则匹配" style="flex:1;border:0;padding:10px 8px;font-size:13px;font-weight:700;background:var(--primary);color:#1a1509;box-shadow:none;border-radius:0;">GSC URL 正则匹配</button>
+              <button type="button" class="regex-sub-tab" data-subtab="ga4" id="subtabGa4" data-seo-node="true" data-section="GA4 AI 爬虫正则" style="flex:1;border:0;padding:10px 8px;font-size:13px;font-weight:700;background:rgba(255,255,255,0.04);color:#c9c3b4;box-shadow:none;border-radius:0;">GA4 AI 爬虫正则</button>
             </div>
-            <div id="subpanelGsc" style="display:block;">
+            <div id="subpanelGsc" data-seo-node="true" data-section="GSC URL 正则匹配" style="display:block;">
               <p style="margin:0 0 12px;color:#b0aa9c;font-size:13px;line-height:1.6;">输入多条 URL，生成精准匹配的正则表达式。</p>
               <label for="gscUrlList">URL 列表（每行一个）</label>
               <textarea class="textarea" id="gscUrlList" placeholder="https://example.com/blog/seo-tips&#10;https://example.com/services/link-building&#10;https://example.com/about" style="min-height:120px;"></textarea>
@@ -476,7 +476,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
                 <div id="gscRegexInfo" style="margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5;"></div>
               </div>
             </div>
-            <div id="subpanelGa4" style="display:none;">
+            <div id="subpanelGa4" data-seo-node="true" data-section="GA4 AI 爬虫正则" style="display:none;">
               <p style="margin:0 0 14px;color:#b0aa9c;font-size:13px;line-height:1.6;">勾选平台，合并该品牌下所有爬虫 UA 生成正则表达式。下方附完整爬虫参考表。</p>
               <label>选择 AI 平台</label>
               <div id="aiBrandList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:8px;"></div>
@@ -513,7 +513,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
         </div>
 
         <!-- ===== Panel: Index Check ===== -->
-        <div class="ext-panel" id="panelIndexCheck" style="display:none;">
+        <div class="ext-panel" id="panelIndexCheck" data-seo-node="true" data-section="批量收录查询" style="display:none;">
           <div class="card-body">
             <div style="display:flex;align-items:center;gap:14px;padding:20px;border-radius:16px;background:linear-gradient(135deg,rgba(251,191,36,0.12),rgba(124,108,255,0.10));border:1px solid rgba(251,191,36,0.25);margin-bottom:18px;">
               <div style="font-size:28px;">🛠️</div>

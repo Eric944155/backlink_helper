@@ -16,7 +16,8 @@ export default function RootLayout({ children }) {
         {/* 外部依赖库 */}
         <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js" />
         <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" />
-        {/* 主逻辑：原 index.html 里所有 <script> 内容，打包进 public/app.js */}
+        {/* 主逻辑：原 index.html 里的脚本内容，打包到 public 目录 */}
+        <script src="/seo-permissions.js" />
         <script src="/app.js" defer />
       </head>
       <body>
