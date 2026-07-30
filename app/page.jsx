@@ -315,7 +315,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
 
             <!-- 目标域名 -->
             <div style="margin-bottom:14px;">
-              <label for="blTargetDomain" style="font-size:12px;font-weight:600;color:#c9c3b4;">目标域名（用于检测链接是否蠢货于页面上）</label>
+              <label for="blTargetDomain" style="font-size:12px;font-weight:600;color:#c9c3b4;">目标域名（用于检测链接是否存活于页面上）</label>
               <input class="text" id="blTargetDomain" placeholder="yoursite.com" style="width:100%;margin-top:4px;padding:8px 10px;font-size:13px;" />
             </div>
 
