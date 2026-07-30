@@ -124,3 +124,52 @@ test('admin route reports missing server configuration', async () => {
     { status: 500, body: { success: false, error: '未设置 ADMIN_PASS 环境变量' } },
   );
 });
+
+test('getAll replaces the legacy SEO catalog entry without changing users', async () => {
+  const { redis, fetchFake } = createRedisFake();
+  redis.set('blh:sections', JSON.stringify([
+    'URL读取',
+    'SEO工具箱',
+    '基础设置',
+  ]));
+  redis.set('blh:users', JSON.stringify({
+    legacy: { pass: 'pw', sections: ['SEO工具箱'] },
+  }));
+
+  const POST = createAdminHandler({
+    adminPass: 'test-admin',
+    redisUrl: 'https://redis.test',
+    redisToken: 'test-token',
+    fetchImpl: fetchFake,
+  });
+  const request = () => new Request('http://localhost/api/admin', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ adminPass: 'test-admin', action: 'getAll' }),
+  });
+
+  const firstResponse = await POST(request());
+  const firstResult = await firstResponse.json();
+
+  assert.deepEqual(firstResult.sections, [
+    'URL读取',
+    '外链存活检测',
+    'Dofollow / Nofollow 检测',
+    'GSC URL 正则匹配',
+    'GA4 AI 爬虫正则',
+    '批量收录查询',
+    '基础设置',
+  ]);
+  assert.deepEqual(firstResult.users, {
+    legacy: { pass: 'pw', sections: ['SEO工具箱'] },
+  });
+  assert.deepEqual(
+    JSON.parse(redis.get('blh:users')),
+    { legacy: { pass: 'pw', sections: ['SEO工具箱'] } },
+  );
+  assert.deepEqual(JSON.parse(redis.get('blh:sections')), firstResult.sections);
+
+  const secondResponse = await POST(request());
+  const secondResult = await secondResponse.json();
+  assert.deepEqual(secondResult.sections, firstResult.sections);
+});
