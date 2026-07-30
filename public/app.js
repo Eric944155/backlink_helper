@@ -2644,6 +2644,20 @@ function parseBulkPublishedUrls(text = '') {
       return df || matches[0];
     }
 
+    // BEGIN deriveHealthLinkDisplay
+    function deriveHealthLinkDisplay(result, targetDomain, myLink) {
+      const scanCompleted = !!(result && result.success && Array.isArray(result.links));
+      if (!scanCompleted) return { linkStatus: '—', linkAttr: '—', anchorText: '—' };
+      if (!targetDomain) return { linkStatus: '未设置域名', linkAttr: '—', anchorText: '—' };
+      if (!myLink) return { linkStatus: '⚠️ 未找到', linkAttr: '—', anchorText: '—' };
+      return {
+        linkStatus: '✅ 存在',
+        linkAttr: myLink.dofollow === 'Yes' ? 'Dofollow' : 'Nofollow',
+        anchorText: myLink.anchorText || '—',
+      };
+    }
+    // END deriveHealthLinkDisplay
+
     // --- Filter buttons ---
     document.querySelectorAll('.bl-filter-btn').forEach(btn => {
       btn.addEventListener('click', function() {
@@ -2691,16 +2705,14 @@ function parseBulkPublishedUrls(text = '') {
         const links=result.links||[];
         const myLink = findMyLink(links, targetDomain);
 
-        // Determine category for filtering
-        let category='dead', linkStatus='—', linkAttr='—', anchorText='—';
+        const { linkStatus, linkAttr, anchorText } = deriveHealthLinkDisplay(result, targetDomain, myLink);
+
+        // Determine category for filtering independently from extracted link details
+        let category='dead';
         if(finalStatus>=200 && finalStatus<300) {
-          if(!targetDomain) { category='alive'; linkStatus='未设置域名'; }
-          else if(myLink) { category='alive'; linkStatus='✅ 存在'; linkAttr=myLink.dofollow==='Yes'?'Dofollow':'Nofollow'; anchorText=myLink.anchorText||'—'; }
-          else { category='linklost'; linkStatus='⚠️ 未找到'; }
+          category = (!targetDomain || myLink) ? 'alive' : 'linklost';
         } else if(finalStatus>=300 && finalStatus<400) {
           category='redirect';
-          if(myLink) { linkStatus='✅ 存在'; linkAttr=myLink.dofollow==='Yes'?'Dofollow':'Nofollow'; anchorText=myLink.anchorText||'—'; }
-          else if(targetDomain) { linkStatus='⚠️ 未找到'; }
         }
 
         healthCheckData[index]={url,finalStatus,statusLabel:label.text,chain,finalUrl,noindex:noindex?'Yes':'No',chainText:formatChainDetail(chain),error:result.error||'',linkFound:myLink?'Yes':'No',dofollow:myLink?myLink.dofollow:'—',anchorText:anchorText==='—'?'':anchorText,category,group:blCurrentGroup};
