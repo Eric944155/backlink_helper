@@ -99,10 +99,10 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
                   <label>并发数</label>
                   <div class="concurrency-choice-group" id="urlConcurrencyChoices">
                     <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="1" />1 个</label>
-                    <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="2" />2 个</label>
+                    <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="2" checked />2 个</label>
                     <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="3" />3 个</label>
                     <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="4" />4 个</label>
-                    <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="6" checked />6 个</label>
+                    <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="6" />6 个</label>
                     <label class="concurrency-choice"><input type="radio" name="urlReadConcurrency" value="8" />8 个</label>
                   </div>
                 </div>
@@ -335,7 +335,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
             <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;align-items:center;">
               <div style="display:flex;align-items:center;gap:6px;">
                 <label for="blConcurrency" style="font-size:12px;font-weight:600;color:#c9c3b4;white-space:nowrap;">并发数</label>
-                <input type="range" id="blConcurrencyRange" min="1" max="10" value="3" style="width:80px;cursor:pointer;" />
+                <input type="range" id="blConcurrencyRange" min="1" max="10" value="2" style="width:80px;cursor:pointer;" />
                 <input type="number" id="blConcurrency" min="1" max="10" value="3" style="width:48px;padding:4px 6px;font-size:12px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;" />
               </div>
               <div style="display:flex;align-items:center;gap:6px;">
@@ -344,7 +344,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
                 <input type="number" id="blDelay" min="0" max="10000" step="100" value="200" style="width:64px;padding:4px 6px;font-size:12px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;" />
                 <span style="font-size:11px;color:#9aa1b8;">ms</span>
               </div>
-              <span style="font-size:11px;color:#9aa1b8;line-height:1.4;">URL 较多时建议降低并发、加大间隔，避免目标站返回 429 或 Vercel 限流</span>
+              <span style="font-size:11px;color:#9aa1b8;line-height:1.4;">URL 较多时建议降低并发、加大间隔，避免请求次数过多或被限流</span>
             </div>
 
             <!-- 操作按钮 -->
