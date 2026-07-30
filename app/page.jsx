@@ -336,7 +336,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
               <div style="display:flex;align-items:center;gap:6px;">
                 <label for="blConcurrency" style="font-size:12px;font-weight:600;color:#c9c3b4;white-space:nowrap;">并发数</label>
                 <input type="range" id="blConcurrencyRange" min="1" max="10" value="2" style="width:80px;cursor:pointer;" />
-                <input type="number" id="blConcurrency" min="1" max="10" value="3" style="width:48px;padding:4px 6px;font-size:12px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;" />
+                <input type="number" id="blConcurrency" min="1" max="10" value="2" style="width:48px;padding:4px 6px;font-size:12px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;" />
               </div>
               <div style="display:flex;align-items:center;gap:6px;">
                 <label for="blDelay" style="font-size:12px;font-weight:600;color:#c9c3b4;white-space:nowrap;">请求间隔</label>
