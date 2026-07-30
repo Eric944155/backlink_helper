@@ -197,6 +197,10 @@ function failure(message, extra = {}) {
   return { success: false, message, error: message, links: [], linkCount: 0, scannedAnchors: 0, fastFailed: true, ...extra };
 }
 
+function shouldParsePageBody(statusCode = 0, body = '') {
+  return statusCode >= 200 && statusCode < 500 && !!body;
+}
+
 export async function GET(request) {
   const { error, payload } = requireAuth(request);
   if (error) return error;
@@ -220,7 +224,7 @@ export async function GET(request) {
       return Response.json(failure(msg, { url: targetUrl, finalUrl: page.finalUrl, statusCode: s }));
     }
 
-    if (!(page.statusCode >= 200 && page.statusCode < 400) || !page.body) {
+    if (!shouldParsePageBody(page.statusCode, page.body)) {
       return Response.json(failure(`目标页面 HTTP ${page.statusCode}`, { url: targetUrl, finalUrl: page.finalUrl, statusCode: page.statusCode }));
     }
 
