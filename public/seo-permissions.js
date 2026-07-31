@@ -9,6 +9,7 @@
     'GSC URL 正则匹配',
     'GA4 AI 爬虫正则',
     '批量收录查询',
+    'AI 爬虫访问检测',
   ];
 
   function resolveSeoAccess(sections) {
@@ -21,6 +22,7 @@
       dofollowCheck: has(SEO_PERMISSION_NAMES[1]),
       regexTool: has(SEO_PERMISSION_NAMES[2]) || has(SEO_PERMISSION_NAMES[3]),
       indexCheck: has(SEO_PERMISSION_NAMES[4]),
+      aiCrawlerCheck: has(SEO_PERMISSION_NAMES[5]),
     };
     const regex = {
       gsc: has(SEO_PERMISSION_NAMES[2]),

@@ -11,6 +11,10 @@ test('layout loads the SEO resolver before the main browser script', () => {
   assert.ok(layout.indexOf('/seo-permissions.js') < layout.indexOf('/app.js'));
 });
 
+test('raw HTML host explicitly suppresses browser normalization hydration noise', () => {
+  assert.match(page, /suppressHydrationWarning/);
+});
+
 test('SEO tabs and panels carry exact permission markers', () => {
   for (const permission of [
     '\u5916\u94fe\u5b58\u6d3b\u68c0\u6d4b',
@@ -18,6 +22,7 @@ test('SEO tabs and panels carry exact permission markers', () => {
     'GSC URL \u6b63\u5219\u5339\u914d',
     'GA4 AI \u722c\u866b\u6b63\u5219',
     '\u6279\u91cf\u6536\u5f55\u67e5\u8be2',
+    'AI \u722c\u866b\u8bbf\u95ee\u68c0\u6d4b',
   ]) {
     assert.match(page, new RegExp(`data-section="${permission}"`));
   }
@@ -28,4 +33,6 @@ test('SEO tabs and panels carry exact permission markers', () => {
 test('main browser script delegates SEO state to the resolver', () => {
   assert.match(appScript, /BlhSeoPermissions\.resolveSeoAccess/);
   assert.match(appScript, /applySeoPermissions/);
+  assert.match(appScript, /initAiCrawlerCheck/);
+  assert.match(appScript, /refreshGa4CatalogFromSharedSource/);
 });

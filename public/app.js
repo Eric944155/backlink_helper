@@ -41,6 +41,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         dofollowCheck: ['tabDofollowCheck', 'panelDofollowCheck'],
         regexTool: ['tabRegexTool', 'panelRegexTool'],
         indexCheck: ['tabIndexCheck', 'panelIndexCheck'],
+        aiCrawlerCheck: ['tabAiCrawlerCheck', 'panelAiCrawlerCheck'],
       };
       Object.entries(mainNodes).forEach(([name, [tabId, panelId]]) => {
         const tab = document.getElementById(tabId);
@@ -64,6 +65,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           tab.style.color = 'var(--primary)';
         }
         if (panel) panel.style.display = 'block';
+        if (access.activeRegex === 'ga4' && typeof window.refreshGa4CatalogFromSharedSource === 'function') {
+          window.refreshGa4CatalogFromSharedSource();
+        }
       }
 
       const regexNodes = {
@@ -2474,7 +2478,8 @@ function parseBulkPublishedUrls(text = '') {
       healthCheck: document.getElementById('panelHealthCheck'),
       dofollowCheck: document.getElementById('panelDofollowCheck'),
       regexTool: document.getElementById('panelRegexTool'),
-      indexCheck: document.getElementById('panelIndexCheck')
+      indexCheck: document.getElementById('panelIndexCheck'),
+      aiCrawlerCheck: document.getElementById('panelAiCrawlerCheck')
     };
     extTabBar.addEventListener('click', e => {
       const btn = e.target.closest('.ext-tab');
@@ -2511,6 +2516,219 @@ function parseBulkPublishedUrls(text = '') {
     async function extCopyText(text,el,msg) { try { if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);} if(el)el.textContent=msg||'已复制'; } catch(e){ if(el)el.textContent='复制失败'; } }
     function extDownloadCsv(filename,csv) { const b=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u;a.download=filename; document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u); }
     function extNormalizeDomain(d) { let v=String(d||'').trim().toLowerCase(); v=v.replace(/^https?:\/\//,'').replace(/^\/\//,''); v=v.split('/')[0].split('?')[0].split('#')[0]; v=v.replace(/:\d+$/,'').replace(/^www\./,''); return v; }
+
+    function initAiCrawlerCheck() {
+      const tab = document.getElementById('tabAiCrawlerCheck');
+      const list = document.getElementById('aiCrawlerList');
+      if (!tab || !list) return;
+      const stats = document.getElementById('aiCrawlerCatalogStats');
+      const message = document.getElementById('aiCrawlerMessage');
+      const selectedCount = document.getElementById('aiCrawlerSelectedCount');
+      const resultBody = document.getElementById('aiCrawlerResultBody');
+      const resultsBox = document.getElementById('aiCrawlerResults');
+      const summaryBox = document.getElementById('aiCrawlerRunSummary');
+      const progress = document.getElementById('aiCrawlerProgress');
+      const overall = document.getElementById('aiCrawlerOverall');
+      const counts = document.getElementById('aiCrawlerCounts');
+      const runButton = document.getElementById('runAiCrawlerCheckBtn');
+      const stopButton = document.getElementById('stopAiCrawlerCheckBtn');
+      let catalog = [];
+      let loaded = false;
+      let loading = false;
+      let controller = null;
+      let total = 0;
+      let completed = 0;
+
+      const authFetch = (url, options={}) => fetch(url, {
+        ...options,
+        headers: { ...(options.headers || {}), ...window.authHeaders() },
+      });
+      const updateSelectedCount = () => {
+        const checked = list.querySelectorAll('input:checked').length;
+        selectedCount.textContent = `（已选 ${checked}）`;
+      };
+      const crawlerInputs = () => [...list.querySelectorAll('input[type="checkbox"]')];
+      const confidenceLabel = { official:'官方', cloudflare_verified:'Cloudflare 已验证', community:'社区' };
+
+      function renderCatalog(data) {
+        catalog = data.crawlers || [];
+        const source = data.sourceStatus === 'live' ? '实时源正常' : '上游不可用，使用本地快照';
+        stats.innerHTML = `原始条目 <b>${data.upstreamCount}</b> · 规范化 <b>${data.normalizedCount}</b><br>可执行 HTTP 探测 <b>${data.probeableCount}</b> · 仅 robots 策略 <b>${data.policyOnlyCount}</b><br>${source} · 更新于 ${extEscapeHtml(data.updatedAt || '未知')}`;
+        list.innerHTML = '';
+        catalog.forEach(crawler => {
+          const label = document.createElement('label');
+          label.className = 'ai-crawler-option';
+          const disabled = crawler.probeMode === 'excluded_generic';
+          label.innerHTML = `<input type="checkbox" value="${extEscapeHtml(crawler.id)}" ${crawler.defaultSelected || crawler.probeMode === 'policy_only' ? 'checked' : ''} ${disabled ? 'disabled' : ''}><span><b>${extEscapeHtml(crawler.operator)} · ${extEscapeHtml(crawler.name)}</b><small>${extEscapeHtml(confidenceLabel[crawler.confidence] || crawler.confidence)} · ${extEscapeHtml(crawler.probeMode)}${disabled ? ' · 通用项不探测' : ''}</small></span>`;
+          label.querySelector('input').addEventListener('change', updateSelectedCount);
+          list.appendChild(label);
+        });
+        updateSelectedCount();
+      }
+
+      async function loadCatalog() {
+        if (loaded || loading) return;
+        loading = true;
+        message.textContent = '正在读取爬虫目录…';
+        try {
+          const response = await authFetch('/api/ai-crawler-check');
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || '目录读取失败');
+          renderCatalog(data);
+          loaded = true;
+          message.textContent = '';
+        } catch (error) {
+          stats.textContent = '目录读取失败';
+          message.textContent = error.message;
+        } finally {
+          loading = false;
+        }
+      }
+
+      function conclusionColor(status) {
+        if (status === 'accessible') return '#34d399';
+        if (status === 'policy_allowed') return '#93c5fd';
+        if (status === 'robots_denied' || status === 'http_denied' || status === 'soft_blocked') return '#fb7185';
+        if (status === 'rate_limited' || status === 'unstable') return '#fbbf24';
+        return '#c4b5fd';
+      }
+
+      function addResult(result) {
+        const row = document.createElement('tr');
+        row.className = 'ai-crawler-result-row';
+        const robots = result.robots
+          ? (result.robots.allowed ? '允许' : '禁止')
+          : '—';
+        row.innerHTML = `<td><b>${extEscapeHtml(result.crawler.operator)}</b><br>${extEscapeHtml(result.crawler.name)} <span class="ai-crawler-badge">${extEscapeHtml(confidenceLabel[result.crawler.confidence] || result.crawler.confidence)}</span></td><td>${result.httpStatus ?? '—'}</td><td>${robots}</td><td style="color:${conclusionColor(result.status)};font-weight:700;">${extEscapeHtml(result.conclusion)}</td>`;
+        const detail = document.createElement('tr');
+        detail.className = 'ai-crawler-detail';
+        detail.style.display = 'none';
+        const chain = (result.redirectChain || []).map(item => `${item.status || 0} ${extEscapeHtml(item.url)}${item.redirectTo ? ` → ${extEscapeHtml(item.redirectTo)}` : ''}`).join('<br>') || '无';
+        const retry = result.retry ? `<br><b>复测：</b>${extEscapeHtml(result.retry.status)} / HTTP ${result.retry.httpStatus || '—'}，证据 ${extEscapeHtml((result.retry.evidence || []).join(', ') || '无')}` : '';
+        detail.innerHTML = `<td colspan="4"><b>最终 URL：</b>${extEscapeHtml(result.finalUrl || '—')}<br><b>跳转链：</b>${chain}<br><b>基线差异 / 证据：</b>${extEscapeHtml((result.evidence || []).join(', ') || '无')}<br><b>响应：</b>${extEscapeHtml(result.contentType || '—')}，正文 ${result.bodyLength ?? '—'} 字符${retry}${result.error ? `<br><b>错误：</b>${extEscapeHtml(result.error)}` : ''}</td>`;
+        row.addEventListener('click', () => { detail.style.display = detail.style.display === 'none' ? 'table-row' : 'none'; });
+        resultBody.append(row, detail);
+      }
+
+      function setRunning(running) {
+        runButton.disabled = running;
+        stopButton.disabled = !running;
+        document.getElementById('testAiCrawlerProxyBtn').disabled = running;
+      }
+
+      async function readStream(response) {
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.message || `请求失败（HTTP ${response.status}）`);
+        }
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        while (true) {
+          const { value, done } = await reader.read();
+          buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            if (!line.trim()) continue;
+            const event = JSON.parse(line);
+            if (event.type === 'start') {
+              total = event.total;
+              overall.textContent = `检测中 · ${event.outbound}`;
+              progress.textContent = `0 / ${total}`;
+            } else if (event.type === 'baseline') {
+              message.textContent = event.error ? `基线异常：${event.error}` : `基线 HTTP ${event.httpStatus}，robots HTTP ${event.robotsStatus || '—'}`;
+            } else if (event.type === 'crawler_result') {
+              completed = event.completed;
+              progress.textContent = `${completed} / ${event.total}`;
+              addResult(event.result);
+            } else if (event.type === 'summary') {
+              overall.textContent = `${event.overall} · ${(event.durationMs / 1000).toFixed(1)} 秒`;
+              const c = event.counts;
+              counts.textContent = `可访问 ${c.accessible} · 策略允许 ${c.policyAllowed || 0} · 策略禁止 ${c.robotsDenied} · HTTP 拒绝 ${c.httpDenied} · 429 ${c.rateLimited} · 软拦截 ${c.softBlocked} · 不稳定 ${c.unstable} · 不确定 ${c.uncertain}`;
+            } else if (event.type === 'error') {
+              throw new Error(event.message);
+            }
+          }
+          if (done) break;
+        }
+      }
+
+      tab.addEventListener('click', loadCatalog);
+      document.getElementById('selectDefaultAiCrawlersBtn').addEventListener('click', () => {
+        crawlerInputs().forEach(input => {
+          const crawler = catalog.find(item => item.id === input.value);
+          input.checked = !input.disabled && Boolean(crawler?.defaultSelected || crawler?.probeMode === 'policy_only');
+        });
+        updateSelectedCount();
+      });
+      document.getElementById('selectAllAiCrawlersBtn').addEventListener('click', () => {
+        crawlerInputs().forEach(input => { if (!input.disabled) input.checked = true; });
+        updateSelectedCount();
+      });
+      document.getElementById('clearAiCrawlersBtn').addEventListener('click', () => {
+        crawlerInputs().forEach(input => { input.checked = false; });
+        updateSelectedCount();
+      });
+      document.getElementById('testAiCrawlerProxyBtn').addEventListener('click', async () => {
+        const url = document.getElementById('aiCrawlerUrl').value.trim();
+        const proxy = document.getElementById('aiCrawlerProxy').value.trim();
+        if (!url) { message.textContent = '请先填写目标 URL'; return; }
+        message.textContent = '正在测试出口…';
+        try {
+          const response = await authFetch('/api/ai-crawler-check?mode=proxy-test', {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json' },
+            body:JSON.stringify({ url, proxy }),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || data.error || '代理测试失败');
+          message.textContent = `连接成功：HTTP ${data.status} · ${data.outbound}`;
+        } catch (error) {
+          message.textContent = error.message;
+        }
+      });
+      runButton.addEventListener('click', async () => {
+        await loadCatalog();
+        const url = document.getElementById('aiCrawlerUrl').value.trim();
+        const crawlerIds = crawlerInputs().filter(input => input.checked).map(input => input.value);
+        if (!url) { message.textContent = '请填写目标 URL'; return; }
+        if (!crawlerIds.length) { message.textContent = '请至少选择一个爬虫'; return; }
+        resultBody.innerHTML = '';
+        resultsBox.style.display = 'block';
+        summaryBox.style.display = 'grid';
+        completed = 0;
+        total = crawlerIds.length;
+        progress.textContent = `0 / ${total}`;
+        counts.textContent = '';
+        overall.textContent = '正在建立普通浏览器基线…';
+        controller = new AbortController();
+        setRunning(true);
+        try {
+          const response = await authFetch('/api/ai-crawler-check', {
+            method:'POST',
+            signal:controller.signal,
+            headers:{ 'Content-Type':'application/json' },
+            body:JSON.stringify({
+              url,
+              crawlerIds,
+              concurrency:Number(document.getElementById('aiCrawlerConcurrency').value || 2),
+              proxy:document.getElementById('aiCrawlerProxy').value.trim() || undefined,
+            }),
+          });
+          await readStream(response);
+        } catch (error) {
+          message.textContent = error.name === 'AbortError' ? `已停止，保留 ${completed} 条结果` : error.message;
+          if (error.name !== 'AbortError') overall.textContent = '无法判断';
+        } finally {
+          controller = null;
+          setRunning(false);
+        }
+      });
+      stopButton.addEventListener('click', () => controller?.abort());
+      if (document.getElementById('panelAiCrawlerCheck').style.display !== 'none') loadCatalog();
+    }
+    initAiCrawlerCheck();
 
     /* ========== Module 1: Backlink Survival Check (Integrated) ========== */
     let healthCheckData = [];
@@ -2902,7 +3120,7 @@ tbody.appendChild(row);
     document.getElementById('clearGscBtn').addEventListener('click',()=>{document.getElementById('gscUrlList').value='';document.getElementById('gscRegexResult').style.display='none';document.getElementById('gscRegexOutput').textContent='';document.getElementById('gscRegexInfo').innerHTML='';document.getElementById('copyGscRegexBtn').disabled=true;});
 
     // --- GA4 AI Bot Regex (Brand-level keyword) ---
-    const AI_BRANDS = [
+    let AI_BRANDS = [
       { brand:'ChatGPT (OpenAI)', icon:'🟢', keyword:'chatgpt', bots:[{ua:'GPTBot',desc:'GPT 模型训练与搜索爬虫'},{ua:'ChatGPT-User',desc:'ChatGPT 对话中的实时浏览'},{ua:'OAI-SearchBot',desc:'ChatGPT 搜索功能专用爬虫'}] },
       { brand:'Gemini (Google)', icon:'🔵', keyword:'gemini', bots:[{ua:'Google-Extended',desc:'Gemini 模型训练爬虫'},{ua:'GoogleOther',desc:'Google 非搜索用途通用爬虫'},{ua:'Google-CloudVertexBot',desc:'Vertex AI 搜索 Grounding 爬虫'}] },
       { brand:'Claude (Anthropic)', icon:'🟠', keyword:'claude', bots:[{ua:'ClaudeBot',desc:'Claude 模型训练爬虫'},{ua:'anthropic-ai',desc:'Anthropic 通用 AI 爬虫'},{ua:'Claude-Web',desc:'Claude 对话中的实时搜索爬虫'}] },
@@ -2958,6 +3176,65 @@ tbody.appendChild(row);
         refTbody.appendChild(row);
       });
     });
+
+    let sharedGa4CatalogLoaded = false;
+    async function refreshGa4CatalogFromSharedSource() {
+      if (sharedGa4CatalogLoaded) return;
+      try {
+        const response = await fetch('/api/ai-crawler-check', { headers: window.authHeaders() });
+        if (!response.ok) return;
+        const data = await response.json();
+        const groups = new Map();
+        (data.crawlers || []).filter(crawler => crawler.probeMode !== 'excluded_generic').forEach(crawler => {
+          const operator = crawler.operator || '其他';
+          if (!groups.has(operator)) groups.set(operator, []);
+          groups.get(operator).push(crawler);
+        });
+        const dynamicBrands = [...groups.entries()].map(([operator, crawlers]) => ({
+          brand: operator,
+          icon: '🤖',
+          keyword: crawlers.map(crawler => String(crawler.robotsToken || crawler.name).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
+          bots: crawlers.map(crawler => ({
+            ua: crawler.robotsToken || crawler.name,
+            desc: `${crawler.category} · ${crawler.confidence}`,
+          })),
+        })).filter(brand => brand.keyword);
+        if (!dynamicBrands.length) return;
+        AI_BRANDS = dynamicBrands;
+        selectedBrands.clear();
+        aiBrandListEl.innerHTML = '';
+        refTbody.innerHTML = '';
+        AI_BRANDS.forEach((brand, idx) => {
+          const card = document.createElement('label');
+          card.style.cssText = 'display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid rgba(255,255,255,0.1);border-radius:12px;background:rgba(255,255,255,0.03);cursor:pointer;transition:.15s;font-size:12px;';
+          card.innerHTML = `<input type="checkbox" value="${idx}" style="margin-top:3px;width:16px;height:16px;flex:0 0 auto;" /><div style="min-width:0;"><div style="font-weight:700;color:#f1ede4;font-size:13px;">${brand.icon} ${extEscapeHtml(brand.brand)}</div><div style="color:#93c5fd;font-size:11px;margin-top:2px;">${brand.bots.length} 个规范化条目</div></div>`;
+          const checkbox = card.querySelector('input');
+          checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+              selectedBrands.add(idx);
+              card.style.borderColor = 'var(--primary)';
+              card.style.background = 'var(--primary-soft)';
+            } else {
+              selectedBrands.delete(idx);
+              card.style.borderColor = 'rgba(255,255,255,0.1)';
+              card.style.background = 'rgba(255,255,255,0.03)';
+            }
+          });
+          aiBrandListEl.appendChild(card);
+          brand.bots.forEach((bot, botIndex) => {
+            const row = document.createElement('tr');
+            row.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
+            row.innerHTML = `<td style="padding:8px;font-weight:${botIndex===0?'700':'400'};color:#f1ede4;">${botIndex===0?brand.icon+' '+extEscapeHtml(brand.brand):''}</td><td style="padding:8px;font-family:'Courier New',monospace;color:#93c5fd;font-size:11px;">${extEscapeHtml(bot.ua)}</td><td style="padding:8px;color:#c9c3b4;">${extEscapeHtml(bot.desc)}</td><td style="padding:8px;text-align:center;color:#9aa1b8;font-size:11px;">分层校验</td>`;
+            refTbody.appendChild(row);
+          });
+        });
+        sharedGa4CatalogLoaded = true;
+      } catch {}
+    }
+    window.refreshGa4CatalogFromSharedSource = refreshGa4CatalogFromSharedSource;
+    document.getElementById('subtabGa4').addEventListener('click', refreshGa4CatalogFromSharedSource);
+    const ga4Panel = document.getElementById('subpanelGa4');
+    if (ga4Panel && ga4Panel.style.display !== 'none') refreshGa4CatalogFromSharedSource();
 
     /* ========== Failed URL Recovery ========== */
     // Collect failed URLs after URL reading completes

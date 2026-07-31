@@ -12,6 +12,7 @@ test('SEO permission names remain exact and ordered', () => {
     'GSC URL 正则匹配',
     'GA4 AI 爬虫正则',
     '批量收录查询',
+    'AI 爬虫访问检测',
   ]);
 });
 
@@ -23,6 +24,7 @@ test('single direct permission selects its matching main tab', () => {
       dofollowCheck: true,
       regexTool: false,
       indexCheck: false,
+      aiCrawlerCheck: false,
     },
     regex: { gsc: false, ga4: false },
     activeMain: 'dofollowCheck',
@@ -38,6 +40,7 @@ test('GSC-only permission opens regex with only GSC enabled', () => {
     dofollowCheck: false,
     regexTool: true,
     indexCheck: false,
+    aiCrawlerCheck: false,
   });
   assert.deepEqual(access.regex, { gsc: true, ga4: false });
   assert.equal(access.activeMain, 'regexTool');
@@ -58,6 +61,7 @@ test('__all__ enables all SEO permissions', () => {
     dofollowCheck: true,
     regexTool: true,
     indexCheck: true,
+    aiCrawlerCheck: true,
   });
   assert.deepEqual(access.regex, { gsc: true, ga4: true });
   assert.equal(access.activeMain, 'healthCheck');

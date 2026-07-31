@@ -293,6 +293,7 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
           <button type="button" class="ext-tab" data-tab="dofollowCheck" id="tabDofollowCheck" data-seo-node="true" data-section="Dofollow / Nofollow 检测" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">Dofollow / Nofollow 检测</button>
           <button type="button" class="ext-tab" data-tab="regexTool" id="tabRegexTool" data-seo-node="true" data-section-any="GSC URL 正则匹配|GA4 AI 爬虫正则" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">正则表达式生成器</button>
           <button type="button" class="ext-tab" data-tab="indexCheck" id="tabIndexCheck" data-seo-node="true" data-section="批量收录查询" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">批量收录查询 <span style="font-size:10px;padding:1px 6px;border-radius:8px;background:rgba(251,191,36,0.18);color:#fbbf24;margin-left:2px;">待更新</span></button>
+          <button type="button" class="ext-tab" data-tab="aiCrawlerCheck" id="tabAiCrawlerCheck" data-seo-node="true" data-section="AI 爬虫访问检测" style="flex:1;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;padding:12px 8px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:none;">AI 爬虫访问检测</button>
         </div>
         <div class="ext-panel" id="panelHealthCheck" data-seo-node="true" data-section="外链存活检测" style="display:block;">
           <div class="card-body">
@@ -513,6 +514,70 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
           </div>
         </div>
 
+        <!-- ===== Panel: AI Crawler Access Check ===== -->
+        <div class="ext-panel" id="panelAiCrawlerCheck" data-seo-node="true" data-section="AI 爬虫访问检测" style="display:none;">
+          <div class="card-body ai-crawler-tool">
+            <div class="ai-crawler-source">
+              <div>
+                <strong>实时社区目录 + 官方校验分层</strong>
+                <p>社区源每 6 小时更新；厂商官方资料优先，Cloudflare 目录用于已验证标记。UA 模拟结果仅代表当前出口下的 robots / HTTP / WAF 行为。</p>
+              </div>
+              <div id="aiCrawlerCatalogStats" class="ai-crawler-stats">正在读取目录…</div>
+            </div>
+
+            <div class="ai-crawler-form">
+              <div class="ai-crawler-url-field">
+                <label for="aiCrawlerUrl">公开 HTTP(S) URL</label>
+                <input class="text" id="aiCrawlerUrl" placeholder="https://www.example.com/page" />
+              </div>
+              <div>
+                <label for="aiCrawlerConcurrency">并发数</label>
+                <select class="text" id="aiCrawlerConcurrency">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="ai-crawler-proxy-field">
+                <label for="aiCrawlerProxy">代理（可选，不会保存）</label>
+                <input class="text" id="aiCrawlerProxy" type="password" autocomplete="off" placeholder="host:port / user:pass@host:port / socks5://…" />
+              </div>
+            </div>
+
+            <div class="ai-crawler-actions">
+              <button type="button" id="testAiCrawlerProxyBtn">测试代理</button>
+              <button class="primary" type="button" id="runAiCrawlerCheckBtn">开始检测</button>
+              <button type="button" id="stopAiCrawlerCheckBtn" disabled>停止检测</button>
+              <span id="aiCrawlerMessage" aria-live="polite"></span>
+            </div>
+
+            <details class="ai-crawler-picker">
+              <summary>选择检测爬虫 <span id="aiCrawlerSelectedCount"></span></summary>
+              <div class="ai-crawler-picker-tools">
+                <button type="button" id="selectDefaultAiCrawlersBtn">恢复默认</button>
+                <button type="button" id="selectAllAiCrawlersBtn">全选可执行项</button>
+                <button type="button" id="clearAiCrawlersBtn">清空</button>
+              </div>
+              <div id="aiCrawlerList" class="ai-crawler-list"></div>
+            </details>
+
+            <div id="aiCrawlerRunSummary" class="ai-crawler-run-summary" style="display:none;">
+              <div id="aiCrawlerOverall">等待检测</div>
+              <div id="aiCrawlerProgress">0 / 0</div>
+              <div id="aiCrawlerCounts"></div>
+            </div>
+
+            <div id="aiCrawlerResults" class="ai-crawler-results" style="display:none;">
+              <table>
+                <thead><tr><th>平台 / 爬虫</th><th>HTTP</th><th>robots</th><th>结论</th></tr></thead>
+                <tbody id="aiCrawlerResultBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <!-- ===== Panel: Index Check ===== -->
         <div class="ext-panel" id="panelIndexCheck" data-seo-node="true" data-section="批量收录查询" style="display:none;">
           <div class="card-body">
@@ -628,6 +693,6 @@ const bodyHTML = `<!-- Google Tag Manager (noscript) -->
 
 export default function HomePage() {
   return (
-    <div dangerouslySetInnerHTML={{ __html: bodyHTML }} />
+    <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: bodyHTML }} />
   );
 }

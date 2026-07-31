@@ -158,6 +158,7 @@ test('getAll replaces the legacy SEO catalog entry without changing users', asyn
     'GSC URL 正则匹配',
     'GA4 AI 爬虫正则',
     '批量收录查询',
+    'AI 爬虫访问检测',
     '基础设置',
   ]);
   assert.deepEqual(firstResult.users, {

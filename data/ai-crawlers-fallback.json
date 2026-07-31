@@ -1,0 +1,826 @@
+{
+  "source": "https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/main/robots.json",
+  "capturedAt": "2026-07-31T02:50:18.904Z",
+  "crawlers": {
+    "AgentTimes": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "AI2Bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "AI2Bot-DeepResearchEval": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "AddSearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "AIWebIndex": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Ai2Bot-Dolma": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "aiHitBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "amazon-kendra": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Amazonbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "amazon-QBusiness": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "AmazonBuyForMe": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Amzn-SearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Andibot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Amzn-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "anthropic-ai": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Anomura": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ApifyBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ApifyWebsiteContentCrawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Applebot-Extended": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Applebot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Aranet-SearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Awario": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "atlassian-bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "AzureAI-SearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "bigsur.ai": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Brightbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Bravebot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "bedrockbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Brightbot 1.0": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Bytespider": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "CCBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "BuddyBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Channel3Bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ChatGLM-Spider": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ChatGPT Agent": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ChatGPT-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Claude-Code": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Claude-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Claude-Web": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Claude-SearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Code": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Cloudflare-AutoRAG": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ClaudeBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "CloudVertexBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Cotoyogi": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "cohere-training-data-crawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "cohere-ai": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "CragCrawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Crawl4AI": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Datenbank Crawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Cursor": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Crawlspace": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "DeepSeekBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Diffbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Devin": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "DuckAssistBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Echobot Bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "EchoboxBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "FacebookBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ExaBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "facebookexternalhit": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Factset_spyderbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "FirecrawlAgent": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "FriendlyCrawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Gemini-Deep-Research": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GeistHaus-PageFetcher": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Google-Agent": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Google-CloudVertexBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Google-Extended": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Google-Firebase": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Google-Gemini-CLI": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Google-NotebookLM": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GoogleAgent-Mariner": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GoogleAgent-URLContext": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GoogleOther": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GoogleOther-Image": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GPTBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "GoogleOther-Video": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "HenkBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "iaskspider": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "iaskspider/2.0": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "IbouBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "iAskBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ImagesiftBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ICC-Crawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "imageSpider": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "img2dataset": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ISSCyberRiskCrawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "kagi-fetcher": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Kangaroo Bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Kimi-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "KlaviyoAIBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "KunatoCrawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "laion-huggingface-processor": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "LAIONDownloader": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "LCC": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "LinerBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Linguee Bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "LinkupBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Manus-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "meta-externalagent": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Meta-ExternalAgent": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "meta-externalfetcher": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Meta-ExternalFetcher": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "meta-webindexer": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "MistralAI-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "MistralAI-User/1.0": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Mozilla-Tabstack": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "MyCentralAIScraperBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "NagetBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "netEstate Imprint Crawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "newsai": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "NotebookLM": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "NovaAct": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "OAI-SearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "omgili": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "omgilibot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "OpenAI": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "opencode": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Operator": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "PanguBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Panscient": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "panscient.com": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Perplexity-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "PerplexityBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "PetalBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "PhindBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Poggio-Citations": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Poseidon Research Crawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "QualifiedBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Querit-SearchBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "QueritBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "QuillBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "quillbot.com": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "SBIntuitionsBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Scrapy": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "SemrushBot-OCOB": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "SemrushBot-SWA": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Shap-User": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ShapBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Sidetrade indexer bot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Spider": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "TavilyBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Terra Cotta": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "TerraCotta": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Thinkbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "TikTokSpider": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Timpibot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "TongyiBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Trae": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "TwinAgent": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "UseAI": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "VelenPublicWebCrawler": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "WARDBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "Webzio-Extended": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "webzio-extended": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "wpbot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "WRTNBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "YaK": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "YandexAdditional": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "YandexAdditionalBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "YiyanBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "YouBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    },
+    "ZanistaBot": {
+      "operator": "Unclear at snapshot time.",
+      "function": "Community listed AI crawler",
+      "description": "Recovered from the latest known community-source execution log."
+    }
+  }
+}
